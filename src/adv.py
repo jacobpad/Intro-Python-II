@@ -51,7 +51,7 @@ try:
                 try:
                     game_loop = False
                 except Exception:
-                    print("\nSorry pal, you can't go that way right now.")
+                    print("\nSorry pal, you can't go that way right now.\n")
 
             # North
             if choice.upper() == ('N'):
@@ -60,7 +60,7 @@ try:
                     player.current_room = player.current_room.n_to
                     print(f"Current room name: {player.current_room}")
                 except Exception:
-                    print("\nSorry, pal, it's impossible to go {choice} right now.")
+                    print("\nSorry, pal, it's impossible to go {choice} right now.\n")
 
             # South
             elif choice.upper() == ('S'):
@@ -69,7 +69,7 @@ try:
                     player.current_room = player.current_room.s_to
                     print(f"Current room name: {player.current_room}")                    
                 except Exception:
-                    print("\nSorry, pal, it's impossible to go {choice} right now.")
+                    print("\nSorry, pal, it's impossible to go {choice} right now.\n")
 
             # East
             elif choice.upper() == ('E'):
@@ -78,7 +78,7 @@ try:
                     player.current_room = player.current_room.e_to
                     print(f"Current room name: {player.current_room}")
                 except Exception:
-                    print("\nSorry, pal, it's impossible to go {choice} right now.")
+                    print("\nSorry, pal, it's impossible to go {choice} right now.\n")
 
             # West
             elif choice.upper() == ('W'):
@@ -87,7 +87,7 @@ try:
                     player.current_room = player.current_room.w_to
                     print(f"Current room name: {player.current_room}")
                 except Exception:
-                    print("\nSorry, pal, it's impossible to go {choice} right now.")
+                    print("\nSorry, pal, it's impossible to go {choice} right now.\n")
 
             else:
                 print("Please enter a valid key")
