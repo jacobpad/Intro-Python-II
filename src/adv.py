@@ -30,74 +30,75 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player(name, room['outside'])
+user_name = input("\n\nI've heard rumors there's a new hero in town, we're all happy you're here!\nPlease, what name shall you be known by?\n")
+player = Player(user_name, room['outside'])
 
 # Make try/except for program
 try:
-     # Write a loop that:
-     game_loop = True
+    # Write a loop that:
+    game_loop = True
 
-      # Print the current room
-      print(f"Current room name: {player.current_room.description}")
+    # Print the current room
+    print(f"\nYou are {player.current_room.name} {player.current_room.description}")
 
-       # Main game loop
-       while game_loop:
+    # Main game loop
+    while game_loop:
 
-            # Collect input from user
-            choice = input("User Input: ")
+        # Collect input from user
+        choice = input("User Input: ")
 
-            # If the user enters "q", quit the game.
-            if choice.upper() == ('Q'):
-                try:
-                    game_loop = False
-                except Exception:
-                    print("\nSorry pal, you can't go that way right now.\n")
+        # If the user enters "q", quit the game.
+        if choice.upper() == ('Q'):
+            try:
+                game_loop = False
+            except Exception:
+                print("\nSorry pal, you can't go that way right now.\n")
 
-            # North
-            if choice.upper() == ('N'):
-                try:
-                    player.current_room.n_to.name
-                    player.current_room = player.current_room.n_to
-                    print(f"Current room name: {player.current_room}")
-                except Exception:
-                    print("\nSorry, pal, it's impossible to go {choice} right now.\n")
+        # North
+        if choice.upper() == ('N'):
+            try:
+                player.current_room.n_to.name
+                player.current_room = player.current_room.n_to
+                print(f"Current room name: {player.current_room}")
+            except Exception:
+                print("\nSorry, pal, it's impossible to go {choice} right now.\n")
 
-            # South
-            elif choice.upper() == ('S'):
-                try:
-                    player.current_room.s_to.name
-                    player.current_room = player.current_room.s_to
-                    print(f"Current room name: {player.current_room}")                    
-                except Exception:
-                    print("\nSorry, pal, it's impossible to go {choice} right now.\n")
+        # South
+        elif choice.upper() == ('S'):
+            try:
+                player.current_room.s_to.name
+                player.current_room = player.current_room.s_to
+                print(f"Current room name: {player.current_room}")                    
+            except Exception:
+                print("\nSorry, pal, it's impossible to go {choice} right now.\n")
 
-            # East
-            elif choice.upper() == ('E'):
-                try:
-                    player.current_room.e_to.name
-                    player.current_room = player.current_room.e_to
-                    print(f"Current room name: {player.current_room}")
-                except Exception:
-                    print("\nSorry, pal, it's impossible to go {choice} right now.\n")
+        # East
+        elif choice.upper() == ('E'):
+            try:
+                player.current_room.e_to.name
+                player.current_room = player.current_room.e_to
+                print(f"Current room name: {player.current_room}")
+            except Exception:
+                print("\nSorry, pal, it's impossible to go {choice} right now.\n")
 
-            # West
-            elif choice.upper() == ('W'):
-                try:
-                    player.current_room.w_to.name
-                    player.current_room = player.current_room.w_to
-                    print(f"Current room name: {player.current_room}")
-                except Exception:
-                    print("\nSorry, pal, it's impossible to go {choice} right now.\n")
+        # West
+        elif choice.upper() == ('W'):
+            try:
+                player.current_room.w_to.name
+                player.current_room = player.current_room.w_to
+                print(f"Current room name: {player.current_room}")
+            except Exception:
+                print("\nSorry, pal, it's impossible to go {choice} right now.\n")
 
-            else:
-                print("Please enter a valid key")
+        else:
+            print("Please enter a valid key")
 
-            # * Prints the current room name
-            print(f"Current room name: {choice}")
+        # * Prints the current room name
+        print(f"Current room name: {choice}")
 
         # End of the world error!
-        except Exception:
-        print("Something bad happened! Now what?")
+except Exception:
+    print("Something bad happened! Now what?")
 
     # * Prints the current description (the textwrap module might be useful here).
 
