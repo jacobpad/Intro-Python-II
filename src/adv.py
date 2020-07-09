@@ -29,8 +29,61 @@ room['treasure'].s_to = room['narrow']
 # Main
 #
 
+# Something fun!
+# https://asciiart.website/index.php?art=objects/computers
+# http://patorjk.com/software/taag/#p=display&h=0&f=Fire%20Font-s&t=Welcome!
+print("""
+
+                         ___..-.---.---.--..___
+               _..-- `.`.   `.  `.  `.      --.._
+              /    ___________\\   \\   \\______    \\
+              |   |.-----------`.  `.  `.---.|   |
+              |`. |'  \\`.        \\   \\   \\  '|   |
+              |`. |'   \\ `-._     `.  `.  `.'|   |
+             /|   |'    `-._o)\\  /(o\\   \\   \\|   |\\
+           .' |   |'  `.     .'  '.  `.  `.  `.  | `.
+          /  .|   |'    `.  (_.==._)   \\   \\   \\ |.  \\         _.--.
+        .' .' |   |'      _.-======-._  `.  `.  `. `. `.    _.-_.-'\\\\
+       /  /   |   |'    .'   |_||_|   `.  \\   \\   \\  \\  \\ .'_.'     ||
+      / .'    |`. |'   /_.-'========`-._\\  `.  `-._`._`. \\(.__      :|
+     ( '      |`. |'.______________________.'\\      _.) ` )`-._`-._/ /
+      \\\\      |   '.------------------------.'`-._-'    //     `-._.'
+      _\\\\_    \\    |ARE YA READY TO PLAY`.`.|    '     //
+     (_  _)    '-._|________________________|_.-'|   _//_
+     /  /      /`-._      |`-._     / /      /   |  (_  _)
+   .'   \\     |`-._ `-._   `-._`-._/ /      /    |    \\  \\
+  /      `.   |    `-._ `-._   `-._|/      /     |    /   `.
+ /  / / /. )  |  `-._  `-._ `-._          /     /   .'      \\
+| | | \\ \\|/   |  `-._`-._  `-._ `-._     /     /.  ( .\\ \\ \\  \\
+ \\ \\ \\ \\/     |  `-._`-._`-._  `-._ `-._/     /  \\  \\|/ / | | |
+  `.\\_\\/       `-._  `-._`-._`-._  `-._/|    /|   \\   \\/ / / /
+              /    `-._  `-._`-._`-._  ||   / |    \\   \\/_/.'
+            .'         `-._  `-._`-._  ||  /  |     \\
+           /           / . `-._  `-._  || /   |      \\
+          '\\          / /      `-._    ||/'._.'       \\
+           \\`.      .' /           `-._|/              \\
+            `.`-._.' .'               \\               .'
+              `-.__\\/                 `\\            .' '
+                                       \\`.       _.' .'
+                                        `.`-._.-' _.'
+                                          `-.__.-'
+
+                                                     ____ 
+ (  (             (                                 |   / 
+ )\\))(   '   (    )\\                  )       (     |  /  
+((_)()\\ )   ))\\  ((_)   (     (      (       ))\\    | /   
+_(())\\_)() /((_)  _     )\\    )\\     )\\  '  /((_)   |/    
+\\ \\((_)/ /(_))   | |   ((_)  ((_)  _((_))  (_))    (      
+ \\ \\/\\/ / / -_)  | |  / _|  / _ \\ | '  \\() / -_)   )\\     
+  \\_/\\_/  \\___|  |_|  \\__|  \\___/ |_|_|_|  \\___|  ((_)                        
+""")
+
+# Make this ... because I can.
+line_updn = ("\n˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅˄˅")
+
 # Make a new player object that is currently in the 'outside' room.
-user_name = input("\n\nI've heard rumors there's a new hero in town, we're all happy you're here!\nPlease, what name shall you be known by?\n")
+user_name = input(
+    "\n\nI've heard rumors there's a new hero in town, we're all happy you're here!\nPlease, what name shall you be known by?\n")
 player = Player(user_name, room['outside'])
 
 # Make try/except for program
@@ -39,13 +92,27 @@ try:
     game_loop = True
 
     # Print the current room
-    print(f"\nYou are {player.current_room.name} {player.current_room.description}")
+    print(
+        f"\nYour location: {player.current_room.name} -\n{player.current_room.description}")
 
     # Main game loop
     while game_loop:
 
+        # * Prints the current description (the textwrap module might be useful here).
+        print(f"{line_updn}\nYour location: {player.current_room.name}")
+        print(f"{player.current_room.description}")
+
         # Collect input from user
-        choice = input("User Input: ")
+        choice = input(
+            """
+            Where would you like to go?\n
+            Your choices are:
+            [w] - North
+            [s] - South
+            [a] - East
+            [d] - West
+            """
+        )
 
         # If the user enters "q", quit the game.
         if choice.upper() == ('Q'):
@@ -55,55 +122,64 @@ try:
                 print("\nSorry pal, you can't go that way right now.\n")
 
         # North
-        if choice.upper() == ('N'):
+        # * Waits for user input and decides what to do.
+        if choice.upper() == ('W'):
             try:
                 player.current_room.n_to.name
                 player.current_room = player.current_room.n_to
-                print(f"Current room name: {player.current_room}")
+
+                # * Prints the current room name
+                # print(f"\nYour location: {player.current_room.name}")
             except Exception:
-                print("\nSorry, pal, it's impossible to go {choice} right now.\n")
+                # If the user enters a cardinal direction, attempt to move to the room there. Print an error message if the movement isn't allowed.
+                print(
+                    f"\n\n{line_updn}\nSorry, pal, it's impossible to go {choice} right now.\n")
 
         # South
+        # * Waits for user input and decides what to do.
         elif choice.upper() == ('S'):
             try:
                 player.current_room.s_to.name
                 player.current_room = player.current_room.s_to
-                print(f"Current room name: {player.current_room}")                    
+
+                # * Prints the current room name
+                # print(f"\nYour location: {player.current_room.name}")
             except Exception:
-                print("\nSorry, pal, it's impossible to go {choice} right now.\n")
+                # If the user enters a cardinal direction, attempt to move to the room there. Print an error message if the movement isn't allowed.
+                print(
+                    f"\n\n{line_updn}\nSorry, pal, it's impossible to go {choice} right now.\n")
 
         # East
-        elif choice.upper() == ('E'):
+        # * Waits for user input and decides what to do.
+        elif choice.upper() == ('A'):
             try:
                 player.current_room.e_to.name
                 player.current_room = player.current_room.e_to
-                print(f"Current room name: {player.current_room}")
+
+                # * Prints the current room name
+                # print(f"\nYour location: {player.current_room.name}")
             except Exception:
-                print("\nSorry, pal, it's impossible to go {choice} right now.\n")
+                # If the user enters a cardinal direction, attempt to move to the room there. Print an error message if the movement isn't allowed.
+                print(
+                    f"\n\n{line_updn}\nSorry, pal, it's impossible to go {choice} right now.\n")
 
         # West
-        elif choice.upper() == ('W'):
+        # * Waits for user input and decides what to do.
+        elif choice.upper() == ('D'):
             try:
                 player.current_room.w_to.name
                 player.current_room = player.current_room.w_to
-                print(f"Current room name: {player.current_room}")
+
+                # * Prints the current room name
+                # print(f"\nYour location: {player.current_room.name}")
             except Exception:
-                print("\nSorry, pal, it's impossible to go {choice} right now.\n")
+                # If the user enters a cardinal direction, attempt to move to the room there. Print an error message if the movement isn't allowed.
+                print(
+                    f"\n\n{line_updn}\nSorry, pal, it's impossible to go {choice} right now.\n")
 
         else:
             print("Please enter a valid key")
 
-        # * Prints the current room name
-        print(f"Current room name: {choice}")
-
-        # End of the world error!
+# End of the world error!
 except Exception:
-    print("Something bad happened! Now what?")
-
-    # * Prints the current description (the textwrap module might be useful here).
-
-    # * Waits for user input and decides what to do.
-
-    # If the user enters a cardinal direction, attempt to move to the room there.
-    # Print an error message if the movement isn't allowed.
-
+    print("Something REALLY bad happened! Now what?")
