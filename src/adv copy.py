@@ -22,6 +22,12 @@ def clear():
     # for mac and linux(here, os.name is 'posix') 
     else: 
         _ = system('clear') 
+
+def sleep_clear(x=.5):
+    # Quick sleep, then clear terminal
+    sleep(x)
+    clear()
+    return
 ###########################################################
 
 # # Declare some items
@@ -126,6 +132,20 @@ user_name = input(
     "\n\nI've heard rumors there's a new hero in town, we're all happy you're here!\nPlease, what name shall you be known by?\n")
 player = Player(user_name, room['outside'])
 
+# Clear the screen
+sleep_clear(1)
+
+# Welcome message
+print(f"Hello, {user_name}! In this game, you'll be presented with many choices.\n\nChoose carefully!\n\nAnd good luck, {user_name}, our lives depend on you... but no pressure!")
+
+# Clear the screen
+continue_game = input("\n\n...press any key to continue...(followed by enter)\n\n")
+continue_game
+if continue_game:
+    sleep_clear(.75)
+
+# Starting location
+print(f"{line_updn}\nYour location: {player.current_room.name} -\n{player.current_room.description}")
 
 
 
@@ -137,12 +157,31 @@ player = Player(user_name, room['outside'])
 
 
 
+def success(x='Success'):
+    print(x)
+    return
 
+def user_input():
+    # Collect input from user
+    choice = input(
+        """
+Where would you like to go? Or what would you like to do?\n
+Your choices are:
+[n] - North
+[s] - South
+[e] - East
+[w] - West
 
+[drop {item}] - Drop a speciffic item
+[get {item}]  - Pick up a specific item\n
 
+[q] - Quit this amazing game\n
+""")
+    return choice
 
-
-
+def error_msg(x=f"\n\n{line_updn}\nSorry, pal, it's impossible to go {user_input()} right now.\n"):
+    print(x)
+    return
 
 
 
@@ -156,15 +195,9 @@ try:
 
     # Print the current room
     print(f"\nYour location: {player.current_room.name} -\n{player.current_room.description}")
-
-
-
+    
     # Main game loop
     while game_loop:
-
-        # Quick sleep, then clear terminal
-        sleep(.25)
-        clear()
         
         # prints the current room
         print(f"{line_updn}\nYour location: {player.current_room.name}")
@@ -177,88 +210,77 @@ try:
         # * Prints the current room description (the textwrap module might be useful here).
         print(f"\n{player.current_room.description}")
 
-        # Collect input from user
-        choice = input(
-        """
-Where would you like to go? Or what would you like to do?\n
-Your choices are:
-[n] - North
-[s] - South
-[e] - East
-[w] - West
-
-[drop {item}] - Drop a speciffic item
-[get {item}]  - Pick up a specific item\n
-
-[q] - Quit this amazing game
-"""
-        )
+        # Get the user's choice
+        choice = user_input()
 
         # If the user enters "q", quit the game.
         if choice.upper() == ('Q'):
             try:
                 game_loop = False
+                sleep_clear()
             except Exception:
                 print("\nSorry pal, you can't go that way right now.\n")
+                sleep_clear(1.5)
 
         # North
-        # * Waits for user input and decides what to do.
         if choice.upper() == ('N'):
             try:
                 player.current_room.n_to.name
                 player.current_room = player.current_room.n_to
-
-                # * Prints the current room name
-                # print(f"\nYour location: {player.current_room.name}")
+                message()
+                sleep_clear()
             except Exception:
                 # If the user enters a cardinal direction, attempt to move to the room there. Print an error message if the movement isn't allowed.
-                print(
-                    f"\n\n{line_updn}\nSorry, pal, it's impossible to go {choice} right now.\n")
+                # print(
+                #     f"\n\n{line_updn}\nSorry, pal, it's impossible to go {choice} right now.\n")
+                error_msg()
+                sleep_clear(1.5)
 
         # South
-        # * Waits for user input and decides what to do.
         elif choice.upper() == ('S'):
             try:
                 player.current_room.s_to.name
                 player.current_room = player.current_room.s_to
-
-                # * Prints the current room name
-                # print(f"\nYour location: {player.current_room.name}")
+                message()
+                sleep_clear()
             except Exception:
                 # If the user enters a cardinal direction, attempt to move to the room there. Print an error message if the movement isn't allowed.
-                print(
-                    f"\n\n{line_updn}\nSorry, pal, it's impossible to go {choice} right now.\n")
+                # print(
+                #     f"\n\n{line_updn}\nSorry, pal, it's impossible to go {choice} right now.\n")
+                error_msg()
+                sleep_clear(1.5)
 
         # East
-        # * Waits for user input and decides what to do.
         elif choice.upper() == ('E'):
             try:
                 player.current_room.e_to.name
                 player.current_room = player.current_room.e_to
-
-                # * Prints the current room name
-                # print(f"\nYour location: {player.current_room.name}")
+                message()
+                sleep_clear()
             except Exception:
                 # If the user enters a cardinal direction, attempt to move to the room there. Print an error message if the movement isn't allowed.
-                print(
-                    f"\n\n{line_updn}\nSorry, pal, it's impossible to go {choice} right now.\n")
+                # print(
+                #     f"\n\n{line_updn}\nSorry, pal, it's impossible to go {choice} right now.\n")
+                error_msg()
+                sleep_clear(1.5)
 
         # West
-        # * Waits for user input and decides what to do.
         elif choice.upper() == ('W'):
             try:
                 player.current_room.w_to.name
                 player.current_room = player.current_room.w_to
-
-                # * Prints the current room name
-                # print(f"\nYour location: {player.current_room.name}")
+                message()
+                sleep_clear()
             except Exception:
                 # If the user enters a cardinal direction, attempt to move to the room there. Print an error message if the movement isn't allowed.
-                print(
-                    f"\n\n{line_updn}\nSorry, pal, it's impossible to go {choice} right now.\n")
+                # print(
+                #     f"\n\n{line_updn}\nSorry, pal, it's impossible to go {choice} right now.\n")
+                error_msg()
+                sleep_clear(1.5)
 
         else:
             print("Please enter a valid key")
+            sleep_clear(1.5)
 
 # End of the world error!
 except Exception:
